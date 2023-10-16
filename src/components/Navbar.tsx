@@ -1,17 +1,18 @@
+"use client";
 import { FC } from "react";
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
 	return (
-		<div className="fixed flex flex-row top-5 px-7 w-screen justify-between gap-5 ">
+		<div className="fixed z-50 flex flex-row top-0 py-5 px-7 w-screen justify-between gap-5 bg-black">
 			<span className="flex flex-row gap-5">
 				{/* Change to Img later when I have logo */}
 				<span className="flex bg-white w-16 h-16 rounded-2xl bg-nav-bg  justify-center place-items-center">
 					Logo
 				</span>
 				<h1 className="text-white h-16 justify-center flex place-items-center text-2xl">
-					Pokemon wiki
+					Blockchain
 				</h1>
 			</span>
 
