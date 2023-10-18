@@ -11,27 +11,27 @@ import {
 
 export const navlinks = [
 	{
-		name: "home",
+		name: "Home",
 		imgUrl: home,
 		link: "/",
 	},
 	{
-		name: "explore",
+		name: "Explore",
 		imgUrl: explore,
 		link: "/explore",
 	},
 	{
-		name: "upcoming",
+		name: "Upcoming",
 		imgUrl: upcoming,
 		link: "/upcoming",
 	},
 	{
-		name: "market statistics",
+		name: "Market Stats",
 		imgUrl: marketStatistics,
 		link: "/marketStatistics",
 	},
 	{
-		yieldFarming: "yield farming",
+		name: "Yield Farming",
 		imgUrl: yieldFarming,
 		link: "/yieldFarming",
 	},
@@ -39,18 +39,18 @@ export const navlinks = [
 
 export const socialMediaLinks = [
 	{
-		name: "twitter",
+		name: "Twitter",
 		imgUrl: twitter,
-		link: "/twitter",
+		link: "https://twitter.com/",
 	},
 	{
-		name: "instagram",
+		name: "Instagram",
 		imgUrl: instagram,
-		link: "/instagram",
+		link: "https://www.instagram.com/",
 	},
 	{
-		name: "youtube",
+		name: "Youtube",
 		imgUrl: youtube,
-		link: "/youtube",
+		link: "https://www.youtube.com/",
 	},
 ];
