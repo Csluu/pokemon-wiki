@@ -6,6 +6,8 @@ import youtube from "./youtube.svg";
 import yieldFarming from "./yieldFarming.svg";
 import instagram from "./instagram.svg";
 import twitter from "./twitter.svg";
+import logo from "./Logo.png";
+import menu from "./menu.svg";
 
 export {
 	home,
@@ -16,4 +18,6 @@ export {
 	yieldFarming,
 	instagram,
 	twitter,
+	logo,
+	menu,
 };
