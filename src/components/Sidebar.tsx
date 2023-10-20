@@ -11,6 +11,7 @@ interface LinkIconProps {
 	name: string;
 	imgUrl: string;
 	isActive: string;
+	isMenuExpanded: boolean;
 	handleClick: (name: string) => void;
 	link: string;
 }
@@ -21,28 +22,51 @@ const LinkIcon = ({
 	handleClick,
 	link,
 	isActive,
+	isMenuExpanded,
 }: LinkIconProps) => (
 	<Link href={link}>
 		<div
-			className="group w-14 h-14 flex justify-center hover:bg-slate-700 rounded-md transition duration-75 ease-in-out place-items-center"
+			className={`hover:bg-slate-700 min-w-[56px] rounded-md transition duration-75 ease-in-out flex group justify-start hover:scale-[102%]  ${
+				isActive && isActive === name && "bg-slate-700"
+			}`}
 			onClick={() => handleClick(name)}
 		>
-			<Image
-				className="opacity-50 group-hover:opacity-100"
-				src={imgUrl}
-				alt={name}
-			/>
+			{/* ! The animation freaks out if I don't have this span might have to do with how the dimensions width are set up */}
 
-			<div className="fixed group-hover:visible invisible text-white left-28 bg-slate-700 p-3 w-fit h-fit justify-center place-items-center rounded-md border-[1px] border-gray-800 transition duration-75 ease-in-out">
-				{name}
-				<div className="absolute -z-10 left-0 top-2 bg-slate-700 w-8 h-8 rounded-sm rotate-45"></div>
-			</div>
+			<span className="flex flex-row   ">
+				{/* Icon  */}
+				<div className={`w-14 h-14 flex justify-center place-items-center  `}>
+					<Image
+						className={`${
+							isActive && isActive !== name && "opacity-50"
+						} opacity-100 group-hover:opacity-100  transition duration-75 `}
+						src={imgUrl}
+						alt={name}
+					/>
+				</div>
+
+				{/* Tool Tip */}
+				{!isMenuExpanded ? (
+					<div className="fixed flex group-hover:visible invisible left-28 text-white bg-slate-700 p-3 w-fit h-fit justify-center place-items-center rounded-md transition duration-75 ease-in-out">
+						{name}
+						<div className="absolute -z-10 left-0 top-2 bg-slate-700 w-8 h-8 rounded-sm rotate-45 "></div>
+					</div>
+				) : (
+					<div
+						className={`opacity-100 group-hover:opacity-100 text-white flex place-items-center w-fit whitespace-nowrap bg text-start ${
+							isActive && isActive !== name && "opacity-50"
+						}`}
+					>
+						{name}
+					</div>
+				)}
+			</span>
 		</div>
 	</Link>
 );
 
 const Sidebar: FC<SidebarProps> = () => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isMenuExpanded, setIsMenuExpanded] = useState(false);
 	const [isActive, setIsActive] = useState("Home");
 
 	// rewrite this a few times
@@ -54,12 +78,24 @@ const Sidebar: FC<SidebarProps> = () => {
 		setIsActive(name);
 	};
 
-	const handleMenu = () => {};
+	const handleMenu = () => {
+		setIsMenuExpanded((prevState) => !prevState);
+	};
 
 	return (
-		<div className="flex fixed w-25 top-28 bottom-5 left-5 flex-col p-3 bg-[#1c1c24] border-nav-border border-[1px] transition-all duration-500 ease-in-out rounded-xl gap-6 overflow-hidden justify-between place-items-center">
-			<div className="flex flex-col gap-2">
-				<div className="flex justify-center place-items-center w-14 h-14">
+		<div
+			id="sidebar"
+			className={`flex fixed ${
+				isMenuExpanded
+					? "w-60 transition-all duration-500"
+					: "w-20 transition-all duration-500"
+			} top-28 bottom-5 left-5 flex-col p-3 bg-[#1c1c24] border-nav-border border-[1px] transition-all duration-500 ease-in-out rounded-xl gap-6 overflow-hidden justify-between place-items-center`}
+		>
+			<div className="flex w-full flex-col gap-2">
+				<div
+					className="flex justify-center place-items-center w-14 h-14 hover:bg-slate-700 rounded-md"
+					onClick={handleMenu}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="36"
@@ -73,14 +109,14 @@ const Sidebar: FC<SidebarProps> = () => {
 					</svg>
 				</div>
 
-				<span className="flex flex-col gap-2">
-					{" "}
+				<span className="flex flex-col gap-2 ">
 					{/* Practice this again  */}
 					{navlinks.map((link) => (
 						<LinkIcon
 							key={link.name}
 							{...link}
 							imgUrl={link.imgUrl}
+							isMenuExpanded={isMenuExpanded}
 							isActive={isActive}
 							handleClick={() => handleClick(link.name)}
 							link={link.link}
@@ -89,13 +125,14 @@ const Sidebar: FC<SidebarProps> = () => {
 				</span>
 			</div>
 			{/* I have to make sure these links open in a different tab with security  */}
-			<div className="flex flex-col bg-black rounded-lg">
+			<div className="flex flex-col bg-black rounded-lg w-full">
 				{/* Practice this again  */}
 				{socialMediaLinks.map((link) => (
 					<LinkIcon
 						key={link.name}
 						{...link}
 						imgUrl={link.imgUrl}
+						isMenuExpanded={isMenuExpanded}
 						isActive={isActive}
 						handleClick={() => handleClick(link.name)}
 						link={link.link}

@@ -22,7 +22,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
 				</h1>
 			</span>
 
-			<span className="flex w-1/4 bg-nav-bg m-1 rounded-full text-white justify-between px-3 place-items-center">
+			<span className="flex w-1/4 bg-nav-bg m-1 rounded-full text-white justify-between px-3 place-items-center  ">
 				<h1 className="flex pl-2 text-gray-500">
 					Search ticker, company, pairs
 				</h1>
