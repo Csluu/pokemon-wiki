@@ -16,6 +16,17 @@ interface LinkIconProps {
 	link: string;
 }
 
+// Check if the link is external
+// ! Double check this code
+const isExternal = (url: string) => {
+	try {
+		let link = new URL(url, window.location.origin);
+		return link.origin !== window.location.origin;
+	} catch (e) {
+		return false;
+	}
+};
+
 const LinkIcon = ({
 	name,
 	imgUrl,
@@ -24,7 +35,11 @@ const LinkIcon = ({
 	isActive,
 	isMenuExpanded,
 }: LinkIconProps) => (
-	<Link href={link}>
+	<Link
+		href={link}
+		target={isExternal(link) ? "_blank" : undefined}
+		rel={isExternal(link) ? "noopener noreferrer" : undefined}
+	>
 		<div
 			className={`hover:bg-slate-700 min-w-[56px] rounded-md transition duration-75 ease-in-out flex group justify-start hover:scale-[102%]  ${
 				isActive && isActive === name && "bg-slate-700"
@@ -32,7 +47,6 @@ const LinkIcon = ({
 			onClick={() => handleClick(name)}
 		>
 			{/* ! The animation freaks out if I don't have this span might have to do with how the dimensions width are set up */}
-
 			<span className="flex flex-row   ">
 				{/* Icon  */}
 				<div className={`w-14 h-14 flex justify-center place-items-center  `}>
