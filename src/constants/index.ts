@@ -16,9 +16,9 @@ export const navlinks = [
 		link: "/",
 	},
 	{
-		name: "Explore",
+		name: "News",
 		imgUrl: explore,
-		link: "/explore",
+		link: "/news",
 	},
 	{
 		name: "Upcoming",
